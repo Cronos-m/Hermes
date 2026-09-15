@@ -413,8 +413,19 @@ updateGainLabel();
 // visita. El registro solo se intenta en contextos seguros (HTTPS o localhost).
 if ("serviceWorker" in navigator && (window.isSecureContext || location.hostname === "localhost")) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch((error) => {
-      console.warn("No se pudo registrar el service worker", error);
-    });
+    navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" })
+      .then((registration) => {
+        // Comprueba si existe una versión nueva del service worker cada vez
+        // que se abre Hermes, evitando que una instalación conserve código
+        // antiguo indefinidamente.
+        registration.update();
+      })
+      .catch((error) => {
+        console.warn("No se pudo registrar el service worker", error);
+      });
   });
+} else if (location.protocol === "file:") {
+  // Los archivos descargados y abiertos directamente no tienen origen seguro.
+  // El aviso evita que el usuario confunda ese modo con una PWA instalada.
+  setStatus("Abre Hermes desde HTTPS o localhost", "error");
 }
