@@ -8,12 +8,14 @@
  *    como respaldo. Las respuestas nuevas se añaden a la caché dinámica.
  */
 
-const CACHE_NAME = "hermes-cache-v1";
+const CACHE_NAME = "hermes-cache-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./app.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./icon.png",
+  "./icon.ico"
 ];
 
 self.addEventListener("install", (event) => {

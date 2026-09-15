@@ -3,23 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b0d10">
+  <meta name="theme-color" content="#190401">
   <meta name="description" content="Captura y amplifica sonidos de baja intensidad con Hermes.">
+  <link rel="icon" href="./icon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="./icon.png" sizes="512x512">
+  <link rel="apple-touch-icon" href="./icon.png">
   <link rel="manifest" href="./manifest.json">
   <title>Hermes | Amplificador de audio</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0b0d10;
-      --panel: #13171c;
-      --panel-soft: #181e24;
-      --border: #29323a;
-      --text: #edf4f1;
-      --muted: #93a09d;
-      --accent: #a7f3d0;
-      --accent-strong: #34d399;
-      --danger: #fb7185;
-      --focus: #fbbf24;
+      --bg: #190401;
+      --panel: #450A02;
+      --panel-soft: #711104;
+      --border: #9D1706;
+      --text: #FEE9E6;
+      --muted: #FDC2BA;
+      --accent: #FB9B8E;
+      --accent-strong: #F97362;
+      --danger: #F62509;
+      --focus: #FDC2BA;
       --radius: 18px;
     }
 
@@ -29,7 +32,7 @@
       margin: 0;
       min-width: 320px;
       min-height: 100vh;
-      background: radial-gradient(circle at 50% -10%, #1b2a2a 0, var(--bg) 38rem);
+      background: radial-gradient(circle at 50% -10%, #711104 0, var(--bg) 38rem);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.5;
@@ -43,22 +46,22 @@
     .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 34px; }
     .topbar-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #33524a; border-radius: 13px; color: var(--accent); background: #13221e; font-size: 1.3rem; font-weight: 800; }
+    .brand-mark { display: block; width: 42px; height: 42px; border: 1px solid #B51A07; border-radius: 13px; background: #450A02; object-fit: cover; }
     h1, h2, p { margin: 0; }
     h1 { font-size: clamp(1.55rem, 4vw, 2rem); letter-spacing: -0.04em; }
     .eyebrow { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
     .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-size: .8rem; white-space: nowrap; }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #64748b; }
-    .status-pill[data-state="active"] { border-color: #256b51; color: var(--accent); }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #B51A07; }
+    .status-pill[data-state="active"] { border-color: #B51A07; color: var(--accent); }
     .status-pill[data-state="active"] .status-dot { background: var(--accent-strong); box-shadow: 0 0 12px var(--accent-strong); }
-    .status-pill[data-state="error"] { border-color: #7f1d1d; color: #fecdd3; }
+    .status-pill[data-state="error"] { border-color: #F62509; color: #FEE9E6; }
     .status-pill[data-state="error"] .status-dot { background: var(--danger); }
 
     .hero { margin-bottom: 24px; }
     .hero h2 { max-width: 720px; margin-top: 9px; font-size: clamp(1.35rem, 3vw, 2.2rem); letter-spacing: -0.035em; line-height: 1.15; }
     .hero p { max-width: 670px; margin-top: 12px; color: var(--muted); }
 
-    .card { padding: clamp(18px, 4vw, 28px); border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(145deg, rgba(24, 30, 36, .96), rgba(16, 20, 25, .98)); box-shadow: 0 18px 50px rgba(0,0,0,.18); }
+    .card { padding: clamp(18px, 4vw, 28px); border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(145deg, rgba(113, 17, 4, .96), rgba(69, 10, 2, .98)); box-shadow: 0 18px 50px rgba(25,4,1,.35); }
     .controls-card { display: grid; gap: 24px; }
     .control-row { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .control-copy { min-width: 220px; flex: 1; }
@@ -69,28 +72,28 @@
     input[type="range"] { width: 100%; accent-color: var(--accent-strong); }
     .range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: .75rem; }
     .button-row { display: flex; gap: 10px; flex-wrap: wrap; }
-    .button { min-height: 44px; padding: 10px 17px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: #20272e; font-weight: 700; transition: border-color .18s, transform .18s, background .18s; }
-    .button:hover:not(:disabled) { border-color: #527268; background: #26352f; transform: translateY(-1px); }
+    .button { min-height: 44px; padding: 10px 17px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: #711104; font-weight: 700; transition: border-color .18s, transform .18s, background .18s; }
+    .button:hover:not(:disabled) { border-color: #F97362; background: #9D1706; transform: translateY(-1px); }
     .button:disabled { cursor: not-allowed; opacity: .45; }
-    .button.primary { border-color: #2d8060; color: #06130e; background: var(--accent); }
-    .button.primary:hover:not(:disabled) { background: #c4f9e0; }
-    .button.danger { border-color: #8f3048; color: #fecdd3; background: #321923; }
+    .button.primary { border-color: #F97362; color: #190401; background: var(--accent); }
+    .button.primary:hover:not(:disabled) { background: #FDC2BA; }
+    .button.danger { border-color: #F62509; color: #FEE9E6; background: #711104; }
 
     .meter-section { display: grid; gap: 10px; }
     .meter-header { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: .8rem; }
-    .meter { height: 10px; overflow: hidden; border-radius: 999px; background: #0a0d10; }
-    .meter-fill { width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #34d399, #facc15, #fb7185); transition: width .08s linear; }
+    .meter { height: 10px; overflow: hidden; border-radius: 999px; background: #190401; }
+    .meter-fill { width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #F97362, #FB9B8E, #F84C35, #F62509); transition: width .08s linear; }
 
     .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
     .panel-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
     .panel-title h3 { font-size: 1.04rem; }
     .panel-title span { color: var(--muted); font-size: .78rem; }
-    .transcript { min-height: 174px; max-height: 280px; overflow-y: auto; padding: 14px; border: 1px solid var(--border); border-radius: 12px; color: #dbe8e3; background: #0d1115; white-space: pre-wrap; }
-    .transcript:empty::before { content: "La transcripción aparecerá aquí cuando inicies la captura."; color: #65736f; }
+    .transcript { min-height: 174px; max-height: 280px; overflow-y: auto; padding: 14px; border: 1px solid var(--border); border-radius: 12px; color: #FEE9E6; background: #190401; white-space: pre-wrap; }
+    .transcript:empty::before { content: "La transcripción aparecerá aquí cuando inicies la captura."; color: #FDC2BA; }
     audio { width: 100%; }
     .empty-audio { display: grid; place-items: center; min-height: 100px; padding: 16px; border: 1px dashed var(--border); border-radius: 12px; color: var(--muted); text-align: center; font-size: .88rem; }
     .notice { margin-top: 18px; color: var(--muted); font-size: .8rem; }
-    .notice strong { color: #d6e4df; }
+    .notice strong { color: #FEE9E6; }
     .instructions-view { display: none; }
     .instructions-view.is-visible { display: block; }
     .main-view.is-hidden { display: none; }
@@ -99,7 +102,7 @@
     .instructions-card h3 { margin: 0 0 6px; font-size: 1rem; color: var(--accent); }
     .instructions-card p, .instructions-card li { color: var(--muted); }
     .instructions-card ol, .instructions-card ul { display: grid; gap: 12px; margin: 0; padding-left: 22px; }
-    .instructions-card code { padding: 2px 5px; border-radius: 5px; color: var(--accent); background: #0b1210; }
+    .instructions-card code { padding: 2px 5px; border-radius: 5px; color: var(--accent); background: #450A02; }
     .show-screen { position: fixed; inset: 0; z-index: 20; display: none; overflow-y: auto; padding: 24px; color: #f5f5f5; background: #000; }
     .show-screen.is-visible { display: block; }
     .show-exit { position: fixed; top: 18px; right: 18px; z-index: 21; min-width: 82px; padding: 9px 14px; border: 1px solid #444; border-radius: 8px; color: #fff; background: #111; font-weight: 700; }
@@ -111,7 +114,7 @@
     .word-number { color: #555; font-size: .42em; font-variant-numeric: tabular-nums; }
     .show-empty { color: #555; font-size: clamp(1rem, 3vw, 1.4rem); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    footer { margin-top: 28px; color: #6e7c78; font-size: .78rem; text-align: center; }
+    footer { margin-top: 28px; color: #FDC2BA; font-size: .78rem; text-align: center; }
 
     @media (max-width: 650px) {
       .app-shell { width: min(100% - 22px, 920px); padding-top: 18px; }
@@ -127,7 +130,7 @@
   <main class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true">H</div>
+        <img class="brand-mark" src="./icon.png" alt="Logo de Hermes">
         <div>
           <p class="eyebrow">Laboratorio de escucha</p>
           <h1>Hermes</h1>

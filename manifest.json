@@ -5,21 +5,15 @@
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0b0d10",
-  "theme_color": "#0b0d10",
+  "background_color": "#190401",
+  "theme_color": "#190401",
   "lang": "es",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%230b0d10'/%3E%3Cpath d='M96 37a22 22 0 0 0-22 22v39a22 22 0 0 0 44 0V59a22 22 0 0 0-22-22Zm-39 61a39 39 0 0 0 78 0h-13a26 26 0 0 1-52 0H57Zm32 47v-17h14v17h-14Zm-25 10h64v-13H64v13Z' fill='%23a7f3d0'/%3E%3C/svg%3E",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230b0d10'/%3E%3Cpath d='M256 99a59 59 0 0 0-59 59v104a59 59 0 0 0 118 0V158a59 59 0 0 0-59-59Zm-104 163a104 104 0 0 0 208 0h-35a69 69 0 0 1-138 0h-35Zm85 125v-45h38v45h-38Zm-67 27h172v-35H170v35Z' fill='%23a7f3d0'/%3E%3C/svg%3E",
+      "src": "./icon.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
